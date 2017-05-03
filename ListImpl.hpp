@@ -17,6 +17,8 @@
 #ifndef LISTIMPL_HPP
 #define LISTIMPL_HPP
 
+#include <stdexcept>
+
 template <typename T>
 List<T>::Node::Node(): previous(nullptr),
                        next(nullptr)
@@ -70,6 +72,9 @@ bool List<T>::Node::hasPrevious() {
 }
 
 template <typename T>
+List<T>::Iterator::Iterator(): node(nullptr) {}
+
+template <typename T>
 List<T>::Iterator::Iterator(const List<T>::Iterator &it): node(it.node)
 {}
 
@@ -94,8 +99,9 @@ bool List<T>::Iterator::operator!=(const List::Iterator &it) {
 
 template <typename T>
 typename List<T>::Iterator &List<T>::Iterator::operator++() {
-    if(node)
-    node = node->getNext();
+    if(node->hasNext()) {
+        node = node->getNext();
+    }
     return *this;
 }
 
@@ -126,16 +132,18 @@ T& List<T>::Iterator::operator*() const {
     return node->getData();
 }
 
-
 template <typename T>
-List<T>::List():_size(0), head(nullptr), tail(nullptr) {}
-
+List<T>::List():_size(0), head(nullptr), tail(nullptr), _begin(new Node()) {
+    _begin->setNext(head);
+}
 template <typename T>
-List<T>::List(const T& d):_size(1){
+List<T>::List(const T& d):_size(1),
+                          _begin(new Node()) {
     Node* e = new Node(d);
     head = e;
     tail = new Node();
     tail->setPrevious(e);
+    _begin->setNext(head);
 }
 
 template <typename T>
@@ -163,6 +171,7 @@ void List<T>::insert(const T& d){
         tail = new Node();
         tail->setPrevious(e);;
     }
+    _begin->setNext(head);
     _size++;
 }
 
@@ -173,6 +182,7 @@ void List<T>::append(const T& d){
         Node* previous = tail->getPrevious();
         previous->setNext(e);
         e->setNext(tail);
+        e->setPrevious(previous);
         tail->setPrevious(e);
     }
     else{
@@ -180,6 +190,7 @@ void List<T>::append(const T& d){
         tail = new Node();
         tail->setPrevious(e);
     }
+    _begin->setNext(head);
     _size++;
 }
 
@@ -193,7 +204,12 @@ T& List<T>::operator [](const int index) {
     for(int i = 0; i < index; i++) {
         ++it;
     }
+
     return *it;
+}
+template <typename T>
+void remove(const T d) {
+
 }
 
 template <typename T>
@@ -208,12 +224,12 @@ typename List<T>::Iterator List<T>::end() {
 
 template <typename T>
 typename List<T>::Iterator List<T>::rbegin() {
-    return *(new Iterator(tail));
+    return *(new Iterator(tail->getPrevious()));
 }
 
 template <typename T>
 typename List<T>::Iterator List<T>::rend() {
-    return *(new Iterator(head));
+    return *(new Iterator(_begin));
 }
 
 

@@ -48,6 +48,7 @@ public:
     class Iterator{
 
     public:
+        Iterator();
         Iterator(Node* e): node(e){};
         Iterator(const Iterator& it);
         virtual ~Iterator();
@@ -100,7 +101,7 @@ public:
 
     T& operator [](const int index);
 
-    void remove(const T& d);
+    void remove(const T d);
 
     void remove(const int index);
 
@@ -117,6 +118,7 @@ private:
     int _size;
     Node* head;
     Node* tail;
+    Node* _begin;
 };
 
 

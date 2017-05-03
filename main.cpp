@@ -15,7 +15,6 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <string>
 
 #include "List.hpp"
 
@@ -39,6 +38,13 @@ int main() {
     }
      */
 
+//    for(List<int>::Iterator it = l.begin(); it != l.end(); it++){
+//        cout << *it << endl;
+//    }
+
+//    for(List<int>::Iterator it = l.rbegin(); it != l.rend(); --it){
+//        cout << *it << endl;
+//    }
 
     return EXIT_SUCCESS;
 }
