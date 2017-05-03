@@ -31,7 +31,7 @@ class List {
 
         Node* getPrevious();
         Node* getNext();
-        T getData();
+        T& getData();
         void setPrevious(Node* n);
         void setNext(Node* n);
         bool operator == (const Node& n);
@@ -48,6 +48,7 @@ public:
     class Iterator{
 
     public:
+        Iterator();
         Iterator(Node* e): node(e){};
         Iterator(const Iterator& it);
         virtual ~Iterator();
@@ -59,7 +60,7 @@ public:
         Iterator operator ++ (int);
         Iterator& operator -- ();
         Iterator operator -- (int);
-        T operator * () const;
+        T& operator * ();
 
     private:
         Node* node;
@@ -117,6 +118,7 @@ private:
     int _size;
     Node* head;
     Node* tail;
+    Node* _begin;
 };
 
 

@@ -15,7 +15,6 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <string>
 
 #include "List.hpp"
 
@@ -23,18 +22,20 @@ using namespace std;
 
 int main() {
 
-    List<int> l(1);
-    l.insert(4);
-    l.append(3);
-    int a = l.size();
-    for(List<int>::Iterator it = l.begin(); it != l.end(); it++){
-        cout << *it << endl;
-    }
+    List<int> l(3);
+    l.insert(2);
+    l.insert(1);
+    l.append(4);
 
-    for(List<int>::Iterator it = l.rbegin(); it != l.rend(); it--){
-        cout << *it << endl;
-    }
+    cout << l[1] << endl;
 
+//    for(List<int>::Iterator it = l.begin(); it != l.end(); it++){
+//        cout << *it << endl;
+//    }
+
+//    for(List<int>::Iterator it = l.rbegin(); it != l.rend(); --it){
+//        cout << *it << endl;
+//    }
 
     return EXIT_SUCCESS;
 }
