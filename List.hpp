@@ -31,7 +31,7 @@ class List {
 
         Node* getPrevious();
         Node* getNext();
-        T getData();
+        T& getData();
         void setPrevious(Node* n);
         void setNext(Node* n);
         bool operator == (const Node& n);
@@ -59,7 +59,7 @@ public:
         Iterator operator ++ (int);
         Iterator& operator -- ();
         Iterator operator -- (int);
-        T operator * () const;
+        T& operator * () const;
 
     private:
         Node* node;

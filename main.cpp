@@ -23,17 +23,21 @@ using namespace std;
 
 int main() {
 
-    List<int> l(1);
-    l.insert(4);
-    l.append(3);
+    List<string> l("un");
+    l.insert("deux");
+    l.append("trois");
     int a = l.size();
-    for(List<int>::Iterator it = l.begin(); it != l.end(); it++){
+    for(List<string>::Iterator it = l.begin(); it != l.end(); it++){
         cout << *it << endl;
     }
 
+    cout << l[1] << endl;
+
+    /*
     for(List<int>::Iterator it = l.rbegin(); it != l.rend(); it--){
         cout << *it << endl;
     }
+     */
 
 
     return EXIT_SUCCESS;

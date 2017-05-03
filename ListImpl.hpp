@@ -39,7 +39,7 @@ typename List<T>::Node *List<T>::Node::getNext() {
 }
 
 template <typename T>
-T List<T>::Node::getData() {
+T& List<T>::Node::getData() {
     return data;
 }
 
@@ -122,16 +122,14 @@ typename List<T>::Iterator List<T>::Iterator::operator--(int) {
 }
 
 template <typename T>
-T List<T>::Iterator::operator*() const {
+T& List<T>::Iterator::operator*() const {
     return node->getData();
 }
 
 
 template <typename T>
-List<T>::List():_size(0),
-                head(nullptr),
-                tail(nullptr)
-{}
+List<T>::List():_size(0), head(nullptr), tail(nullptr) {}
+
 template <typename T>
 List<T>::List(const T& d):_size(1){
     Node* e = new Node(d);
@@ -141,9 +139,7 @@ List<T>::List(const T& d):_size(1){
 }
 
 template <typename T>
-List<T>::List(const List& l): _size(l._size),
-                              head(l.head),
-                              tail(l.tail)
+List<T>::List(const List& l): _size(l._size), head(l.head), tail(l.tail)
 {}
 
 template <typename T>
@@ -185,6 +181,19 @@ void List<T>::append(const T& d){
         tail->setPrevious(e);
     }
     _size++;
+}
+
+template <typename T>
+T& List<T>::operator [](const int index) {
+
+    if (index >= _size) {
+        throw std::out_of_range("Out of range !");
+    }
+    Iterator it = begin();
+    for(int i = 0; i < index; i++) {
+        ++it;
+    }
+    return *it;
 }
 
 template <typename T>
