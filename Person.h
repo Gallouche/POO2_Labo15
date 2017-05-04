@@ -2,8 +2,8 @@
 // Created by Pierre-Samuel Rochat on 04.05.17.
 //
 
-#ifndef POO2_LABO15_PERSON_H
-#define POO2_LABO15_PERSON_H
+#ifndef PERSON_H
+#define PERSON_H
 
 #include <string.h>
 #include <iostream>
@@ -45,9 +45,9 @@ public:
     virtual ~Wizard() {}
     virtual void fight(const Person& p) {
         cout << this->getTitle() + " attaque " + p.getTitle() << endl;
-        cout << "Je lance un sort avec mon bâton !" << endl << endl;
+        cout << "Je lance un sort avec mon baton !" << endl << endl;
     }
     virtual string getTitle() const { return "Wizard " + _name; }
 };
 
-#endif //POO2_LABO15_PERSON_H
+#endif //PERSON_H
