@@ -98,20 +98,22 @@ public:
 
     void append(const T& d);
 
+    void clear();
+
     List<T>& operator = (const List<T>& l);
 
     T& operator [](const int index);
 
     void remove(const T d);
 
-    void remove(const int index);
+    void removeAt(const int index);
 
     Iterator find(const T& d);
 
-    Iterator begin();
-    Iterator end();
-    Iterator rbegin();
-    Iterator rend();
+    Iterator begin() const;
+    Iterator end() const;
+    Iterator rbegin() const;
+    Iterator rend() const;
 
 
 

@@ -27,15 +27,26 @@ int main() {
     l.insert(1);
     l.append(4);
 
+    List<int> l2(l), l3;
+    l3 = l2;
+
+
+    cout << "Liste : ";
     for(List<int>::Iterator it = l.begin(); it != l.end(); it++){
-        cout << *it << endl;
+        cout << *it;
+    }
+    cout << endl << "Liste copie constructeur: ";
+
+    for(List<int>::Iterator it = l2.begin(); it != l2.end(); it++){
+        cout << *it;
     }
 
-    l[2]= 7;
-    List<int>::Iterator is = l.rend();
-    for(List<int>::Iterator it = l.rbegin(); it != l.rend(); --it){
-        cout << *it << endl;
+    cout << endl << "Liste copie affectation: ";
+
+    for(List<int>::Iterator it = l3.begin(); it != l3.end(); it++){
+        cout << *it;
     }
+    cout << endl;
 
     return EXIT_SUCCESS;
 }
