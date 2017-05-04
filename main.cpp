@@ -22,29 +22,38 @@ using namespace std;
 
 int main() {
 
-    List<int> l(3);
-    l.insert(2);
-    l.insert(1);
-    l.append(4);
-
-    List<int> l2(l), l3;
-    l3 = l2;
-
+    List<string> l("deux");
+    l.insert("un");
+    l.append("trois");
 
     cout << "Liste : ";
-    for(List<int>::Iterator it = l.begin(); it != l.end(); it++){
-        cout << *it;
+    for(List<string>::Iterator it = l.begin(); it != l.end(); it++){
+        cout << *it << " ";
     }
-    cout << endl << "Liste copie constructeur: ";
+    cout << endl;
 
-    for(List<int>::Iterator it = l2.begin(); it != l2.end(); it++){
-        cout << *it;
+    List<string>::Iterator it = l.find("");
+    cout << endl << "Recherche deux : " << *it << endl;
+
+    List<string> l2 = l;
+    cout << endl << "Liste copie : ";
+    for(List<string>::Iterator it = l2.begin(); it != l2.end(); it++){
+        cout << *it << " ";
     }
+    cout << endl;
 
-    cout << endl << "Liste copie affectation: ";
 
-    for(List<int>::Iterator it = l3.begin(); it != l3.end(); it++){
-        cout << *it;
+    l.remove("un");
+    cout << endl << "Liste sans un : ";
+    for(List<string>::Iterator it = l.begin(); it != l.end(); it++) {
+        cout << *it << " ";
+    }
+    cout << endl;
+
+    l.removeAt(0);
+    cout << endl << "Liste sans un deux : ";
+    for(List<string>::Iterator it = l.begin(); it != l.end(); it++) {
+        cout << *it << " ";
     }
     cout << endl;
 

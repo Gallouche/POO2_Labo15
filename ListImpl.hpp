@@ -19,6 +19,8 @@
 
 #include <stdexcept>
 
+/*----------------------Node---------------------*/
+
 template <typename T>
 List<T>::Node::Node(): previous(nullptr),
                        next(nullptr)
@@ -46,7 +48,6 @@ T& List<T>::Node::getData() {
 }
 
 template <typename T>
-
 void List<T>::Node::setPrevious(List::Node *n) {
     previous = n;
 }
@@ -54,11 +55,6 @@ void List<T>::Node::setPrevious(List::Node *n) {
 template <typename T>
 void List<T>::Node::setNext(List<T>::Node *n) {
     next = n;
-}
-
-template <typename T>
-bool List<T>::Node::operator==(const List::Node &n) {
-    return data == n.data;
 }
 
 template <typename T>
@@ -72,14 +68,16 @@ bool List<T>::Node::hasPrevious() {
 }
 
 template <typename T>
-List<T>::Iterator::Iterator(): node(nullptr) {}
+bool List<T>::Node::operator==(const List::Node &n) {
+    return data == n.data;
+}
+
+/*-----------------------Iterator------------------------*/
 
 template <typename T>
-List<T>::Iterator::Iterator(const List<T>::Iterator &it): node(it.node)
-{}
-
-template <typename T>
-List<T>::Iterator::~Iterator() {}
+typename List<T>::Node* List<T>::Iterator::getNode() const {
+    return node;
+}
 
 template <typename T>
 typename List<T>::Iterator &List<T>::Iterator::operator=(const List::Iterator &it) {
@@ -95,7 +93,6 @@ template <typename T>
 bool List<T>::Iterator::operator!=(const List::Iterator &it) {
     return !(*node == *(it.node));
 }
-
 
 template <typename T>
 typename List<T>::Iterator &List<T>::Iterator::operator++() {
@@ -132,16 +129,16 @@ T& List<T>::Iterator::operator*() const{
     return node->getData();
 }
 
+/*------------------------List----------------------------*/
+
 template <typename T>
 List<T>::List():_size(0),
                 head(new Node()),
                 tail(new Node())
-{}
-
-//template <typename T>
-//typename Node* List<T>::Iterator::getNode() const {
-//    return node;
-//}
+{
+    head->setNext(tail);
+    tail->setPrevious(head);
+}
 
 template <typename T>
 List<T>::List(const T& d):_size(1),
@@ -162,11 +159,13 @@ List<T>::List(const List& l): List()
     }
 }
 
+//TODO
 template <typename T>
-List<T>::~List(){}
+List<T>::~List(){
+    clear();
+}
 
 template <typename T>
-
 int List<T>::size() const{
     return _size;
 }
@@ -210,51 +209,74 @@ void List<T>::append(const T& d){
 }
 
 template <typename T>
+void List<T>::remove(const T& d) {
+
+    for(List<T>::Iterator it = begin(); it != end(); it++) {
+        if(*it == d) {
+
+            Node* currentNode = it.getNode();
+
+            currentNode->getPrevious()->setNext(currentNode->getNext());
+            currentNode->getNext()->setPrevious(currentNode->getPrevious());
+
+            delete currentNode;
+            _size--;
+
+            break;
+        }
+     }
+}
+
+template <typename T>
+void List<T>::removeAt(const int index) {
+    if (index >= _size) {
+        throw std::out_of_range("Out of range !");
+    }
+
+    Iterator it = begin();
+    for(int i = 0; i < index; i++) {
+        ++it;
+    }
+
+    Node* currentNode = it.getNode();
+
+    currentNode->getPrevious()->setNext(currentNode->getNext());
+    currentNode->getNext()->setPrevious(currentNode->getPrevious());
+
+    delete currentNode;
+    _size--;
+}
+
+template <typename T>
 T& List<T>::operator [](const int index) {
 
     if (index >= _size) {
         throw std::out_of_range("Out of range !");
     }
 
-    Iterator it = begin();
+    Iterator it = begin()++;
 
     for(int i = 0; i < index; i++) {
         ++it;
     }
-
     return *it;
 }
 
 template <typename T>
-void List<T>::remove(const T d) {
+List<T> &List<T>::operator=(const List<T> &l) {
+    clear();
+    List<T> _return = new List(l);
+    return _return;
+}
 
-    if (_size == 0) {
-        //throw std::out_of_range("Empty list !");
-    }
-
-    List<T>::Iterator it = begin();
-
-    /*
-    while(it != end()) {
-
+template <typename T>
+typename List<T>::Iterator List<T>::find(const T &d) {
+    for(List<T>::Iterator it = begin(); it != end(); it++) {
         if(*it == d) {
-
-            if(it == head) {
-                head->getNext()->getNext()->setPrevious(head);
-                head->setNext(head->getNext()->getNext());
-            } else {
-                it->getPrevious()->setNext(current->getNext());
-                current->getNext()->setPrevious(current->getPrevious());
-            }
-
-            delete current;
-            break;
+            return it;
         }
-
-        ++it;
-
-     }
-     */
+    }
+    return --end();
 }
 
 template <typename T>
@@ -278,14 +300,11 @@ typename List<T>::Iterator List<T>::rend() const {
 }
 
 template <typename T>
-List<T> &List::operator=(const List<T> &l) {
-    return List(l);
-}
-
-template <typename T>
 void List<T>::clear() {
-    
+    for(List<T>::Iterator it = begin(); it != end(); it++){
+        delete it.getNode();
+    }
+    delete head;
+    delete tail;
 }
-
-
 #endif /* LISTIMPL_HPP */

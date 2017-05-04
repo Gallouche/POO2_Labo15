@@ -34,24 +34,25 @@ class List {
         T& getData();
         void setPrevious(Node* n);
         void setNext(Node* n);
-        bool operator == (const Node& n);
         bool hasNext();
         bool hasPrevious();
+        bool operator == (const Node& n);
 
     private:
         T data;
         Node* previous;
         Node* next;
+
     };
 
 public:
     class Iterator{
 
     public:
-        Iterator();
+        Iterator(): node(nullptr) {};
         Iterator(Node* e): node(e){};
-        Iterator(const Iterator& it);
-        virtual ~Iterator();
+        Iterator(const Iterator& it): node(it.node) {};
+        virtual ~Iterator(){};
 
         Node* getNode() const;
         Iterator& operator = (const Iterator& it);
@@ -95,21 +96,14 @@ public:
     * @param d élément a inserer
     */
     void insert(const T& d);
-
     void append(const T& d);
-
-    void clear();
-
-    List<T>& operator = (const List<T>& l);
-
-    T& operator [](const int index);
-
-    void remove(const T d);
-
+    void remove(const T& d);
     void removeAt(const int index);
 
-    Iterator find(const T& d);
+    T& operator [](const int index);
+    List<T>& operator = (const List<T>& l);
 
+    Iterator find(const T& d);
     Iterator begin() const;
     Iterator end() const;
     Iterator rbegin() const;
@@ -121,6 +115,8 @@ private:
     int _size;
     Node* head;
     Node* tail;
+
+    void clear();
 };
 
 
