@@ -32,7 +32,7 @@ int main() {
 
     cout << endl;
 
-    l.remove("un");
+    l.removeElement("un");
 
     for(List<string>::Iterator it = l.begin(); it != l.end(); it++){
         cout << *it << endl;
@@ -40,25 +40,22 @@ int main() {
 
     cout << endl;
 
-    l[1] = "dixhuit";
+    l.remove(1);
 
     for(List<string>::Iterator it = l.begin(); it != l.end(); it++){
         cout << *it << endl;
     }
 
-    /*
-    for(List<int>::Iterator it = l.rbegin(); it != l.rend(); it--){
+
+    cout << endl;
+
+    l[0] = "dix-huit";
+
+
+    for(List<string>::Iterator it = l.begin(); it != l.end(); it++){
         cout << *it << endl;
     }
-     */
 
-//    for(List<int>::Iterator it = l.begin(); it != l.end(); it++){
-//        cout << *it << endl;
-//    }
-
-//    for(List<int>::Iterator it = l.rbegin(); it != l.rend(); --it){
-//        cout << *it << endl;
-//    }
 
     return EXIT_SUCCESS;
 }

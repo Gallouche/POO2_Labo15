@@ -102,7 +102,7 @@ public:
 
     T& operator [](const int index);
 
-    void remove(const T d);
+    void removeElement(const T d);
 
     void remove(const int index);
 
@@ -119,7 +119,6 @@ private:
     int _size;
     Node* head;
     Node* tail;
-    Node* _begin;
 };
 
 
