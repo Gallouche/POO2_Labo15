@@ -206,45 +206,32 @@ T& List<T>::operator [](const int index) {
         throw std::out_of_range("Out of range !");
     }
 
-    Iterator it = begin();
+    Iterator it = begin()++;
 
     for(int i = 0; i < index; i++) {
         ++it;
     }
-
     return *it;
 }
 
 template <typename T>
 void List<T>::remove(const T d) {
 
-    if (_size == 0) {
-        //throw std::out_of_range("Empty list !");
-    }
-
-    List<T>::Iterator it = begin();
-
-    /*
-    while(it != end()) {
-
+    for(List<T>::Iterator it = begin(); it != end(); it++) {
         if(*it == d) {
 
-            if(it == head) {
+            if(it.getNode() == head) {
                 head->getNext()->getNext()->setPrevious(head);
                 head->setNext(head->getNext()->getNext());
             } else {
-                it->getPrevious()->setNext(current->getNext());
-                current->getNext()->setPrevious(current->getPrevious());
+                it.getNode()->getPrevious()->setNext(it.getNode()->getNext());
+                it.getNode()->getNext()->setPrevious(it.getNode()->getPrevious());
             }
 
-            delete current;
+            delete it.getNode();
             break;
         }
-
-        ++it;
-
      }
-     */
 }
 
 template <typename T>

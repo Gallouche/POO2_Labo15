@@ -22,15 +22,24 @@ using namespace std;
 
 int main() {
 
-    List<string> l("un");
-    l.insert("deux");
+    List<string> l("deux");
+    l.insert("un");
     l.append("trois");
     int a = l.size();
     for(List<string>::Iterator it = l.begin(); it != l.end(); it++){
         cout << *it << endl;
     }
 
-    l.remove("deux");
+    cout << endl;
+
+    l.remove("un");
+
+    for(List<string>::Iterator it = l.begin(); it != l.end(); it++){
+        cout << *it << endl;
+    }
+
+    cout << endl;
+
     l[1] = "dixhuit";
 
     for(List<string>::Iterator it = l.begin(); it != l.end(); it++){
