@@ -128,7 +128,7 @@ typename List<T>::Iterator List<T>::Iterator::operator--(int) {
 }
 
 template <typename T>
-T& List<T>::Iterator::operator*()  {
+T& List<T>::Iterator::operator*() const {
     return node->getData();
 }
 
@@ -137,6 +137,12 @@ List<T>::List():_size(0),
                 head(new Node()),
                 tail(new Node())
 {}
+
+typename List<T>::Node* List<T>::Iterator::getNode() const {
+    return node;
+}
+
+
 template <typename T>
 List<T>::List(const T& d):_size(1),
                           head(new Node()),
@@ -205,12 +211,46 @@ T& List<T>::operator [](const int index) {
     if (index >= _size) {
         throw std::out_of_range("Out of range !");
     }
+
     Iterator it = begin();
+
     for(int i = 0; i < index; i++) {
         ++it;
     }
 
     return *it;
+}
+
+template <typename T>
+void List<T>::remove(const T d) {
+
+    if (_size == 0) {
+        //throw std::out_of_range("Empty list !");
+    }
+
+    List<T>::Iterator it = begin();
+
+    /*
+    while(it != end()) {
+
+        if(*it == d) {
+
+            if(it == head) {
+                head->getNext()->getNext()->setPrevious(head);
+                head->setNext(head->getNext()->getNext());
+            } else {
+                it->getPrevious()->setNext(current->getNext());
+                current->getNext()->setPrevious(current->getPrevious());
+            }
+
+            delete current;
+            break;
+        }
+
+        ++it;
+
+     }
+     */
 }
 
 template <typename T>
