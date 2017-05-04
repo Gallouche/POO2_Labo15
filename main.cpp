@@ -17,6 +17,7 @@
 #include <iostream>
 
 #include "List.hpp"
+#include "Person.h"
 
 using namespace std;
 
@@ -55,7 +56,27 @@ int main() {
     for(List<string>::Iterator it = l.begin(); it != l.end(); it++) {
         cout << *it << " ";
     }
-    cout << endl;
+    cout << endl << endl;
+
+
+    List<Person*> people;
+    Person *person  = new Person("Bilbon", 10);
+    Person *warrior = new Warrior("Ragnar", 150, 100);
+    Person *wizard  = new Wizard("Gandalf", 50, 100);
+
+    people.append(person);
+    people.append(warrior);
+    people.append(wizard);
+
+    for(List<Person*>::Iterator p1 = people.begin(); p1 != people.end(); p1++) {
+        for(List<Person*>::Iterator p2 = people.begin(); p2 != people.end(); p2++) {
+            (*p1)->fight(*(*p2));
+        }
+    }
+
+    delete person;
+    delete warrior;
+    delete wizard;
 
     return EXIT_SUCCESS;
 }
