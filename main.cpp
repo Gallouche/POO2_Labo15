@@ -30,7 +30,12 @@ int main() {
         cout << *it << endl;
     }
 
-    cout << l[1] << endl;
+    l.remove("deux");
+    l[1] = "dixhuit";
+
+    for(List<string>::Iterator it = l.begin(); it != l.end(); it++){
+        cout << *it << endl;
+    }
 
     /*
     for(List<int>::Iterator it = l.rbegin(); it != l.rend(); it--){

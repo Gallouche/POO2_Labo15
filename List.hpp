@@ -53,6 +53,7 @@ public:
         Iterator(const Iterator& it);
         virtual ~Iterator();
 
+        Node* getNode() const;
         Iterator& operator = (const Iterator& it);
         bool operator == (const Iterator& it);
         bool operator != (const Iterator& it);
@@ -84,15 +85,15 @@ public:
     virtual ~List<T>();
 
     /**
-  * Accesseur sur la taille de la liste
-  * @return taille de la liste
-  */
+    * Accesseur sur la taille de la liste
+    * @return taille de la liste
+    */
     int size() const;
 
     /**
-  * Insere un élément de type T dans la list
-  * @param d élément a inserer
-  */
+    * Insere un élément de type T dans la list
+    * @param d élément a inserer
+    */
     void insert(const T& d);
 
     void append(const T& d);
