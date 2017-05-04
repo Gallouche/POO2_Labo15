@@ -134,31 +134,29 @@ T& List<T>::Iterator::operator*()  {
 
 template <typename T>
 List<T>::List():_size(0),
-                head(nullptr),
-                tail(nullptr),
-                _begin(new Node()) {
-    _begin->setNext(head);
-}
+                head(new Node()),
+                tail(new Node())
+{}
 template <typename T>
 List<T>::List(const T& d):_size(1),
-                          _begin(new Node()) {
+                          head(new Node()),
+                          tail(new Node()){
     Node* e = new Node(d);
-    head = e;
-    tail = new Node();
+    head->setNext(e);
+    e->setPrevious(head);
     tail->setPrevious(e);
-    _begin->setNext(head);
+    e->setNext(tail);
 }
 
 template <typename T>
-List<T>::List(const List& l): _size(l._size),
-                              head(l.head),
-                              tail(l.tail)
+List<T>::List(const List& l)
 {}
 
 template <typename T>
 List<T>::~List(){}
 
 template <typename T>
+
 int List<T>::size() const{
     return _size;
 }
@@ -166,36 +164,38 @@ int List<T>::size() const{
 template <typename T>
 void List<T>::insert(const T& d){
     Node* e = new Node(d);
-    if(head != nullptr){
-        head->setPrevious(e);
-        e->setNext(head);
-        head = e;
+    if(head->getNext() != tail){
+        Node* oldHeadNext = head->getNext();
+        e->setNext(head->getNext());
+        e->setPrevious(head);
+        oldHeadNext->setPrevious(e);
+        head->setNext(e);
     }
     else{
-        head = e;
-        tail = new Node();
-        tail->setPrevious(e);;
+        head->setNext(e);
+        e->setPrevious(head);
+        tail->setPrevious(e);
+        e->setNext(tail);
     }
-    _begin->setNext(head);
     _size++;
 }
 
 template <typename T>
 void List<T>::append(const T& d){
     Node* e = new Node(d);
-    if(head != nullptr){
-        Node* previous = tail->getPrevious();
-        previous->setNext(e);
-        e->setNext(tail);
-        e->setPrevious(previous);
+    if(head->getNext() != tail){
+        Node* oldPreviousTail = tail->getPrevious();
         tail->setPrevious(e);
+        e->setNext(tail);
+        oldPreviousTail->setNext(e);
+        e->setPrevious(oldPreviousTail);
     }
     else{
-        head = e;
-        tail = new Node();
+        head->setNext(e);
+        e->setPrevious(head);
         tail->setPrevious(e);
+        e->setNext(tail);
     }
-    _begin->setNext(head);
     _size++;
 }
 
@@ -215,7 +215,7 @@ T& List<T>::operator [](const int index) {
 
 template <typename T>
 typename List<T>::Iterator List<T>::begin() {
-    return *(new Iterator(head));
+    return *(new Iterator(head->getNext()));
 }
 
 template <typename T>
@@ -230,7 +230,7 @@ typename List<T>::Iterator List<T>::rbegin() {
 
 template <typename T>
 typename List<T>::Iterator List<T>::rend() {
-    return *(new Iterator(_begin));
+    return *(new Iterator(head));
 }
 
 

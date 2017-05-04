@@ -27,15 +27,15 @@ int main() {
     l.insert(1);
     l.append(4);
 
-    cout << l[1] << endl;
+    for(List<int>::Iterator it = l.begin(); it != l.end(); it++){
+        cout << *it << endl;
+    }
 
-//    for(List<int>::Iterator it = l.begin(); it != l.end(); it++){
-//        cout << *it << endl;
-//    }
-
-//    for(List<int>::Iterator it = l.rbegin(); it != l.rend(); --it){
-//        cout << *it << endl;
-//    }
+    l[2]= 7;
+    List<int>::Iterator is = l.rend();
+    for(List<int>::Iterator it = l.rbegin(); it != l.rend(); --it){
+        cout << *it << endl;
+    }
 
     return EXIT_SUCCESS;
 }

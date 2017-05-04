@@ -118,7 +118,6 @@ private:
     int _size;
     Node* head;
     Node* tail;
-    Node* _begin;
 };
 
 
