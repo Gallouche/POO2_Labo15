@@ -3,11 +3,12 @@
  Laboratoire : Laboratoire 15 : Liste générique
  Fichier     : main.cpp
  Auteur(s)   : Théo Gallandat <theo.gallandat@heig-vd.ch>
- Date        : 01.05.2017
+               Pierre-Samuel Rochat <pierre-samuel.rochat@heig-vd.ch>
+ Date        : 05.05.2017
 
- But         : <à compléter>
+ But         : Fourni une série de tests de la classe List
 
- Remarque(s) : <à compléter>
+ Remarque(s) : R.A.S.
 
  Compilateur : MinGW-g++ 4.8.1
  -----------------------------------------------------------------------------------
@@ -17,7 +18,7 @@
 #include <iostream>
 
 #include "List.hpp"
-#include "Person.h"
+#include "Person.hpp"
 
 using namespace std;
 
@@ -34,22 +35,27 @@ int main() {
     cout << "Creation liste avec l'element 1" << endl;
     List<int> lInt(1);
     affichage(lInt);
+    cout << endl;
 
     cout << "Insertion (debut) de l'element 2" << endl;
     lInt.insert(2);
     affichage(lInt);
+    cout << endl;
 
     cout << "Insertion (fin) de l'element 3" << endl;
     lInt.append(3);
     affichage(lInt);
+    cout << endl;
 
     cout << "Modification avec du 2 eme element (index 1) en 5" << endl;
     lInt[1] = 5;
     affichage(lInt);
+    cout << endl;
 
     cout << "Suppression de l'element a l'index 2" << endl;
     lInt.removeAt(2);
     affichage(lInt);
+    cout << endl;
 
     cout << "Ajout de quelques element" << endl;
     lInt.append(4);
@@ -57,61 +63,86 @@ int main() {
     lInt.append(38);
     lInt.append(76);
     affichage(lInt);
+    cout << endl;
 
     cout << "Supression de l'element 42" << endl;
     lInt.remove(42);
     affichage(lInt);
+    cout << endl;
 
     cout << "Supression d'un element inexistant"  << endl;
     lInt.remove(53);
     affichage(lInt);
+    cout << endl;
 
     cout << "Retour de la taille de la liste" << endl;
     int a = lInt.size();
     affichage(lInt);
     cout << "Taille liste : " << a << endl;
+    cout << endl;
 
     cout << "Recherche de l'element 5 dans la liste et affichage" << endl;
     List<int>::Iterator it = lInt.find(5);
     cout << "Element : " << *it << endl;
+    cout << endl;
 
 
     /*--------------------- List<string> -----------------------*/
+    cout << "------------------ Test List<string> ------------------" << endl;
+    cout << "Creation liste avec l'element 1" << endl;
+    List<string> lstring("salut");
+    affichage(lstring);
+    cout << endl;
 
-//    List<string> l("deux");
-//    l.insert("un");
-//    l.append("trois");
-//
-//    cout << "Liste : ";
-//    cout << l << endl;
-//
-//
-//    List<string>::Iterator it = l.find("");
-//    cout << endl << "Recherche deux : " << *it << endl;
-//
-//    List<string> l2 = l;
-//    cout << endl << "Liste copie : ";
-//    for(List<string>::Iterator it = l2.begin(); it != l2.end(); it++){
-//        cout << *it << " ";
-//    }
-//    cout << endl;
-//
-//
-//    l.remove("un");
-//    cout << endl << "Liste sans un : ";
-//    for(List<string>::Iterator it = l.begin(); it != l.end(); it++) {
-//        cout << *it << " ";
-//    }
-//    cout << endl;
-//
-//    l.removeAt(0);
-//    cout << endl << "Liste sans un deux : ";
-//    for(List<string>::Iterator it = l.begin(); it != l.end(); it++) {
-//        cout << *it << " ";
-//    }
-//    cout << endl << endl;
-//
-//
+    cout << "Insertion (debut) de l'element 2" << endl;
+    lstring.insert("fromage");
+    affichage(lstring);
+    cout << endl;
+
+    cout << "Insertion (fin) de l'element 3" << endl;
+    lstring.append("abricot");
+    affichage(lstring);
+    cout << endl;
+
+    cout << "Modification avec du 2 eme element (index 1) en \"salade\" " << endl;
+    lstring[1] = "salade";
+    affichage(lstring);
+    cout << endl;
+
+    cout << "Suppression de l'element a l'index 2" << endl;
+    lstring.removeAt(2);
+    affichage(lstring);
+    cout << endl;
+
+    cout << "Ajout de quelques element" << endl;
+    lstring.append("lutin");
+    lstring.append("filou");
+    lstring.append("retard");
+    lstring.append("cff");
+    affichage(lstring);
+    cout << endl;
+
+    cout << "Supression de l'element filou" << endl;
+    lstring.remove("filou");
+    affichage(lstring);
+
+    cout << "Supression d'un element inexistant \"dragon\""  << endl;
+    lstring.remove("dragon");
+    affichage(lstring);
+    cout << endl;
+
+    cout << "Retour de la taille de la liste" << endl;
+    int b = lstring.size();
+    affichage(lstring);
+    cout << "Taille liste : " << b << endl;
+    cout << endl;
+
+    cout << "Recherche de l'element \"abricot\" dans la liste et affichage" << endl;
+    List<string>::Iterator is = lstring.find("abricot");
+    cout << "Element : " << *is << endl;
+    cout << endl;
+
+
     /*------------------------- List<Person> -----------------------*/
     //Tests avec des personnes et des classe qui en hérite.
 

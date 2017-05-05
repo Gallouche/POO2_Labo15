@@ -1,9 +1,10 @@
 /*
  -----------------------------------------------------------------------------------
- Laboratoire : <nn>
+ Laboratoire : Laboratoire 15 : Liste générique
  Fichier     : ListImpl.hpp
  Auteur(s)   : Théo Gallandat <theo.gallandat@heig-vd.ch>
- Date        : 02.05.2017
+               Pierre-Samuel Rochat <pierre-samuel.rochat@heig-vd.ch>
+ Date        : 05.05.2017
 
  But         : Implémentation de la classe List<T>
 
@@ -223,8 +224,11 @@ void List<T>::remove(const T& d) {
 
             break;
         }
+        else if(it == end()){
+            cout << "Element inexistant !" << endl;
+        }
      }
-    cout << "Element inexistant !" << endl;
+
 }
 
 template <typename T>

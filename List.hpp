@@ -3,7 +3,8 @@
  Laboratoire : Laboratoire 15 : Liste générique
  Fichier     : List.hpp
  Auteur(s)   : Théo Gallandat <theo.gallandat@heig-vd.ch>
- Date        : 01.05.2017
+               Pierre-Samuel Rochat <pierre-samuel.rochat@heig-vd.ch>
+ Date        : 05.05.2017
 
  But         : Fournir une liste générique ainsi qu'un itérateur sur
                cette liste.
