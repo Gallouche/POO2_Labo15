@@ -224,6 +224,7 @@ void List<T>::remove(const T& d) {
             break;
         }
      }
+    cout << "Element inexistant !" << endl;
 }
 
 template <typename T>
