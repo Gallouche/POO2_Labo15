@@ -23,15 +23,22 @@ using namespace std;
 
 int main() {
 
+    /*--------------------- List<int> --------------------------*/
+
+    cout << "------------------ Test List<int> ------------------" << endl;
+    cout << "Creation liste avec l'element 1" << endl;
+    List<int> lInt(1);
+    affichage(lInt);
+
+    /*--------------------- List<string> -----------------------*/
+
     List<string> l("deux");
     l.insert("un");
     l.append("trois");
 
     cout << "Liste : ";
-    for(List<string>::Iterator it = l.begin(); it != l.end(); it++){
-        cout << *it << " ";
-    }
-    cout << endl;
+    cout << l << endl;
+
 
     List<string>::Iterator it = l.find("");
     cout << endl << "Recherche deux : " << *it << endl;
@@ -59,6 +66,9 @@ int main() {
     cout << endl << endl;
 
 
+    /*------------------------- List<Person> -----------------------*/
+    //Tests avec des personnes et des classe qui en hérite.
+
     List<Person*> people;
     Person *person  = new Person("Bilbon", 10);
     Person *warrior = new Warrior("Ragnar", 150, 100);
@@ -79,4 +89,8 @@ int main() {
     delete wizard;
 
     return EXIT_SUCCESS;
+}
+
+void affichage(const List& l){
+    cout << "Liste : " << l<< endl;
 }

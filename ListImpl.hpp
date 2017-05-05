@@ -5,9 +5,9 @@
  Auteur(s)   : Théo Gallandat <theo.gallandat@heig-vd.ch>
  Date        : 02.05.2017
 
- But         : <à compléter>
+ But         : Implémentation de la classe List<T>
 
- Remarque(s) : <à compléter>
+ Remarque(s) : R.A.S.
 
  Compilateur : MinGW-g++ 4.8.1
  -----------------------------------------------------------------------------------
@@ -159,7 +159,6 @@ List<T>::List(const List& l): List()
     }
 }
 
-//TODO
 template <typename T>
 List<T>::~List(){
     clear();
@@ -307,4 +306,13 @@ void List<T>::clear() {
     delete head;
     delete tail;
 }
+
+template <typename T>
+ostream &operator <<(ostream &os, const List<T>& l) {
+    for(typename List<T>::Iterator it = l.begin(); it != l.end(); it++){
+        os << *it << " ";
+    }
+    return os;
+}
+
 #endif /* LISTIMPL_HPP */

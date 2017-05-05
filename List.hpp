@@ -5,9 +5,21 @@
  Auteur(s)   : Théo Gallandat <theo.gallandat@heig-vd.ch>
  Date        : 01.05.2017
 
- But         : <à compléter>
+ But         : Fournir une liste générique ainsi qu'un itérateur sur
+               cette liste.
 
- Remarque(s) : <à compléter>
+ Remarque(s) : Nous avons fait le choix de ne pas garder de pointeurs
+               sur le premier et le dernier element de la liste. Nous
+               gardons uniquement des pointeurs sur des élement "fantome",
+               un avant le premier element et un apres le dernier element.
+               Grace a cela il nous est facile d'implémenter les itérateurs
+               et de pouvoir nous arreter au bon endroit lors du parcours de
+               la liste.
+               De plus nous avons renommer les méthode remove, en effet, pour
+               une liste de int, il y a une ambiguité lors de l'appel de remove,
+               entre le choix d'aller chercher a l'index x ou de cherche le x en
+               temps que tel. Nous avons donc renomer le remove qui prend un index
+               en paremètre en removeAt.
 
  Compilateur : MinGW-g++ 4.8.1
  -----------------------------------------------------------------------------------
@@ -16,12 +28,25 @@
 #ifndef LIST_H
 #define LIST_H
 
+#include <iostream>
+
+using namespace std;
+
+template <typename T>
+class List;
+
+template <typename T>
+ostream& operator << (ostream& os, const List<T>& l);
+
 template <typename T>
 class List {
 
     class Node {
 
     public:
+        /**
+         * Constructeur sans paramètre de la classe interne Node
+         */
         Node();
         /**
          * Constructeur de la classe interne Node
@@ -242,6 +267,14 @@ public:
     * @return la nouvelle liste
     */
     List<T>& operator = (const List<T>& l);
+
+    /**
+     * Operateur de flux de sortie
+     * @param os flux de sortie
+     * @param l liste a afficher
+     * @return flux de sortie
+     */
+    friend ostream& operator << <T>(ostream& os, const List<T>& l);
 
     /**
     * Retourne un iterateur sur le premier element de la liste correspondant a d
